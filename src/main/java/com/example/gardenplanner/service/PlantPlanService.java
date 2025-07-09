@@ -6,8 +6,7 @@ import com.example.gardenplanner.repository.PlantPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * *******************************************************
@@ -67,8 +66,7 @@ public class PlantPlanService {
     /**
      * Retrieve a single PlatPlan by its unique identifier
      *
-     * @param id The unique identifier of the product
-     * @return  An {@link Optional} containing the PlantPlan if found, or empty if not found.
+     * @return An {@link Optional} containing the PlantPlan if found, or empty if not found.
      */
     public Optional<PlantPlan> getPlantPlanById(String id){
         return plantPlanRepository.findById(id);
@@ -95,5 +93,5 @@ public class PlantPlanService {
     public void deletePlantPlan(String id){
         plantPlanRepository.deleteById(id);
     }
-    
+
 }
