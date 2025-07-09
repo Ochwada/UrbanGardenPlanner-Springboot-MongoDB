@@ -1,6 +1,6 @@
  # Urban Garden Planner
 
-Welcome to your MongoDB + Spring Boot assignment!
+Welcome MongoDB + Spring Boot Micro Project!
 
 A RESTful API to help urban gardeners plan and track their plantings.  Instead of a shop or library example, this will 
 let users store and retrieve information about the plants they want to grow, their care instructions, and seasonal notes.
