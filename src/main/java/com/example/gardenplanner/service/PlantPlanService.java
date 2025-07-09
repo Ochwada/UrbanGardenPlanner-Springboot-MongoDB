@@ -68,10 +68,32 @@ public class PlantPlanService {
      * Retrieve a single PlatPlan by its unique identifier
      *
      * @param id The unique identifier of the product
-     * @return  An Optional containing the PlantPlan if found oe empty if not found.
+     * @return  An {@link Optional} containing the PlantPlan if found, or empty if not found.
      */
     public Optional<PlantPlan> getPlantPlanById(String id){
         return plantPlanRepository.findById(id);
     }
 
+    /**
+     * Updates an existing PlantPlan with the given ID using the provided updated data.
+     *
+     * @param id The unique identifier of the PlantPlan to be updated.
+     * @param update The updated PlantPlan data. The ID will be set to match the given ID.
+     * @return The updated {@link PlantPlan} saved in the database.
+     */
+    public PlantPlan updatePlantPlan(String id, PlantPlan update){
+        update.setId(id);
+        return plantPlanRepository.save(update);
+    }
+
+    /**
+     * Deletes a PlantPlan by its unique identifier.
+     *
+     * @param id The unique identifier of the PlantPlan to delete.
+     *           If the ID does not exist, no action is taken.
+     */
+    public void deletePlantPlan(String id){
+        plantPlanRepository.deleteById(id);
+    }
+    
 }
