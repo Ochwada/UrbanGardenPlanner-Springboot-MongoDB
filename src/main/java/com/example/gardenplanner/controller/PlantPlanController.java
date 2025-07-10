@@ -161,7 +161,8 @@ public class PlantPlanController {
      */
     @GetMapping("/count/season/{season}")
     public long countByPlantingSeason(@PathVariable String season) {
-        return service.countByPlantingSeason(season);
+        System.out.println( "Plant Count in " + season + ": ");
+        return  service.countByPlantingSeason(season);
     }
 
     /**
