@@ -1,6 +1,8 @@
 package com.example.gardenplanner.model;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * *******************************************************
  * Package: com.example.gardenplanner.model
@@ -18,5 +20,20 @@ public enum Season {
     WINTER,
     SPRING,
     SUMMER,
-    AUTUMN
+    AUTUMN;
+
+    /**
+     * Factory method to enable case-insensitive deserialization of enum values.
+     * *
+     * This method is automatically used by Jackson when deserializing JSON
+     * due to the @JsonCreator annotation.
+     *
+     * @param input the season string from JSON (e.g., "summer", "WINTER")
+     * @return the corresponding Season enum constant
+     * @throws IllegalArgumentException if input does not match any Season
+     */
+    @JsonCreator
+    public static Season fromString(String input) {
+        return Season.valueOf(input.trim().toUpperCase());
+    }
 }

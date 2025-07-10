@@ -2,7 +2,10 @@ package com.example.gardenplanner.repository;
 
 
 import com.example.gardenplanner.model.PlantPlan;
+import com.example.gardenplanner.model.Season;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.*;
 
 /**
  * *******************************************************
@@ -28,5 +31,20 @@ public interface PlantPlanRepository extends MongoRepository<PlantPlan, String> 
     // - insert(Product product)
     // - deleteById(String id)
     // - count()
+
+    // 1. Find by plantingSeason
+    List<PlantPlan> findByPlantingSeason(Season plantingSeason);
+
+    // 2. Find by sunlightNeeds
+    List<PlantPlan> findBySunlightNeeds(String sunlightNeeds);
+
+    // 3. Search wateringFreq containing keyword
+    List<PlantPlan> findByWateringFreqContainingIgnoreCase(String keyword);
+
+    // 4. Count by plantingSeason
+    long countByPlantingSeason(String plantingSeason);
+
+    // 5. Name search (partial, case-insensitive)
+    List<PlantPlan> findByNameContainingIgnoreCase(String keyword);
 
 }

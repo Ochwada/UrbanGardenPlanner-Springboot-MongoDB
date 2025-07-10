@@ -2,6 +2,7 @@ package com.example.gardenplanner.service;
 
 
 import com.example.gardenplanner.model.PlantPlan;
+import com.example.gardenplanner.model.Season;
 import com.example.gardenplanner.repository.PlantPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,6 +93,26 @@ public class PlantPlanService {
      */
     public void deletePlantPlan(String id){
         plantPlanRepository.deleteById(id);
+    }
+
+    /**
+     * ---------------------------------------------------------------------------
+     * Business methods:
+     * - Custom queries
+     * ---------------------------------------------------------------------------
+     */
+
+    /**
+     * Retrieves a list of {@link PlantPlan} entries that match the given planting season.
+     * <p>
+     * This method delegates the query to the {@code plantPlanRepository}, using the specified {@link Season} enum.
+     * It is case-insensitive since the Season value is parsed using {@link Season#fromString(String)} during input handling.
+     *
+     * @param season the {@link Season} to filter plant plans by (e.g., SPRING, SUMMER)
+     * @return a list of {@link PlantPlan} objects that match the given planting season
+     */
+    public  List<PlantPlan> findByPlantingSeason(Season season){
+        return  plantPlanRepository.findByPlantingSeason(season);
     }
 
 }

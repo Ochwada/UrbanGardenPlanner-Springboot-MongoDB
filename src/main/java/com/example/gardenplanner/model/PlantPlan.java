@@ -1,6 +1,7 @@
 package com.example.gardenplanner.model;
 
 
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -35,12 +36,15 @@ public class PlantPlan {
     private String id;
 
     /** The name of the plant (e.g., "Tomato", "Rose"). */
+    @NotBlank(message = "Name is required")
     private String name;
 
     /** Recommended planting season as an enum. ( MongoDB stores it as a string (e.g., "SPRING", "SUMMER")). */
+    @NotNull(message = "Planting season is required") // used enum hence notnull
     private Season plantingSeason;
 
     /** Sunlight requirements (e.g., "Full Sun", "Partial Shade"). */
+    @NotBlank(message = "Sunlight needs is required")
     private  String sunlightNeeds;
 
     /** Watering frequency (e.g., "Daily", "Twice a week").*/

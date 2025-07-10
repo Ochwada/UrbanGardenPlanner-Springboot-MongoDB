@@ -56,6 +56,13 @@
             <artifactId>dotenv-java</artifactId>
             <version>3.0.0</version>
         </dependency>
+
+        <!--  adds support for Java Bean Validation in  Spring Boot application. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>3.5.3</version>
+        </dependency>
     </dependencies>
 
     <build>

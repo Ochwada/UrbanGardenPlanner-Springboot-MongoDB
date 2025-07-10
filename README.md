@@ -22,7 +22,20 @@ Urban gardening is growing in popularity. But many gardeners struggle to track:
 
 Task: Design a REST API that lets users store and manage their personal urban garden plan.
 
+Each **PlantPlan** record contains:
+
+| Field          | Type    | Description                         |
+| --------------- | ------- | ----------------------------------- |
+| id              | String  | Unique identifier                   |
+| name            | String  | Name of the plant                   |
+| plantingSeason  | String  | Recommended planting season         |
+| sunlightNeeds   | String  | Sunlight requirements               |
+| wateringFreq    | String  | How often to water                  |
+| notes           | String  | Additional notes                    |
+
+
 ###### Why This Project?
+
 1. 👉 It uses real-world thinking (planning, storing structured info)
 2. 👉 It requires NoSQL design (flexible, schema-less)
 3. 👉 It aligns with REST principles (resources, methods)
@@ -31,3 +44,8 @@ Task: Design a REST API that lets users store and manage their personal urban ga
     - Create a Spring Boot project
     - Connect to MongoDB Atlas
     - Expose REST endpoints
+5. 👉 Practice advanced REST design
+6. 👉 Learn custom queries in Spring Data MongoDB 
+7. 👉 Add update and delete endpoints 
+8. 👉 Add validation for data integrity 
+9. 👉 Add calculation endpoints for real-world value 

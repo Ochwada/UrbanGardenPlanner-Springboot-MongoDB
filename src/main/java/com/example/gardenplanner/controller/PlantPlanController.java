@@ -3,6 +3,7 @@ package com.example.gardenplanner.controller;
 
 import com.example.gardenplanner.model.PlantPlan;
 import com.example.gardenplanner.service.PlantPlanService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +50,7 @@ public class PlantPlanController {
      * @return The saved {@link PlantPlan} object.
      */
     @PostMapping("/add-plan")
-    public PlantPlan addPlan(@RequestBody PlantPlan plan){
+    public PlantPlan addPlan(@Valid @RequestBody PlantPlan plan){
         return service.addPlantPlans(plan);
     }
 
