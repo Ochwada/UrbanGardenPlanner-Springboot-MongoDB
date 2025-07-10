@@ -2,6 +2,7 @@ package com.example.gardenplanner.controller;
 
 
 import com.example.gardenplanner.model.PlantPlan;
+import com.example.gardenplanner.model.Season;
 import com.example.gardenplanner.service.PlantPlanService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,4 +111,83 @@ public class PlantPlanController {
      * Custom query endpoints
      --------------------------------------------------------------
      --------------------------------------------------------------*/
+
+    /**
+     * Retrieves a list of {@link PlantPlan} entries for a given planting season.
+     * <p>
+     * Example: GET /season/SUMMER
+     *
+     * @param season the planting season (must match the {@link Season} enum exactly or use case-insensitive mapping)
+     * @return a list of plant plans matching the specified season
+     */
+    @GetMapping("/season/{season}")
+    public List<PlantPlan> getByPlantingSeason(@PathVariable Season season){
+        return service.findByPlantingSeason(season);
+    }
+
+    /**
+     * Retrieves a list of {@link PlantPlan} entries that require the specified sunlight condition.
+     * <p>
+     * Example: GET /sunlight/Full%20Sun
+     *
+     * @param sunlight the sunlight requirement (e.g., "Full Sun", "Partial Shade")
+     * @return a list of plant plans matching the sunlight condition
+     */
+    @GetMapping("/sunlight/{sunlight}")
+    public List<PlantPlan> getBySunlightNeeds(@PathVariable String sunlight){
+        return service.findBySunlightNeeds(sunlight);
+    }
+
+    /**
+     * Searches {@link PlantPlan} entries based on a keyword in their watering frequency field (case-insensitive).
+     * <p>
+     * Example: GET /watering/search?keyword=weekly
+     *
+     * @param keyword the search term to look for within watering frequency
+     * @return a list of plant plans with watering frequencies containing the keyword
+     */
+    @GetMapping("/watering/search")
+    public List<PlantPlan> searchByWateringFreq(@RequestParam String keyword){
+        return service.searchByWateringFreq(keyword);
+    }
+
+    /**
+     * Counts how many {@link PlantPlan} entries exist for a specific planting season.
+     * <p>
+     * Example: GET /count/season/SUMMER
+     *
+     * @param season the planting season (e.g., "SPRING", "AUTUMN")
+     * @return the number of plant plans for the given season
+     */
+    @GetMapping("/count/season/{season}")
+    public long countByPlantingSeason(@PathVariable String season) {
+        return service.countByPlantingSeason(season);
+    }
+
+    /**
+     * Searches {@link PlantPlan} entries by a keyword in the plant name (case-insensitive).
+     * <p>
+     * Example: GET /search?keyword=lavender
+     *
+     * @param keyword the search term to look for in the plant name
+     * @return a list of matching plant plans
+     */
+    @GetMapping("/search")
+    public List<PlantPlan> searchByName(@RequestParam String keyword) {
+        return service.searchByName(keyword);
+    }
+
+    /**
+     * Returns the total number of {@link PlantPlan} entries available in the database.
+     * <p>
+     * Example: GET /count/all
+     *
+     * @return the total count of plant plans
+     */
+    @GetMapping("/count/all")
+    public long getTotalPlansCount() {
+        return service.getTotalPlansCount();
+    }
+
+
 }
