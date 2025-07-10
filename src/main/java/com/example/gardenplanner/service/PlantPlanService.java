@@ -40,8 +40,10 @@ public class PlantPlanService {
 
     /**
      * ---------------------------------------------------------------------------
+     * --------------------------------------------------------------
      * Business methods like
      * - addProduct(), getAllProducts(), getProductById() etc. go here.
+     * --------------------------------------------------------------
      * ---------------------------------------------------------------------------
      */
 
@@ -69,18 +71,18 @@ public class PlantPlanService {
      *
      * @return An {@link Optional} containing the PlantPlan if found, or empty if not found.
      */
-    public Optional<PlantPlan> getPlantPlanById(String id){
+    public Optional<PlantPlan> getPlantPlanById(String id) {
         return plantPlanRepository.findById(id);
     }
 
     /**
      * Updates an existing PlantPlan with the given ID using the provided updated data.
      *
-     * @param id The unique identifier of the PlantPlan to be updated.
+     * @param id     The unique identifier of the PlantPlan to be updated.
      * @param update The updated PlantPlan data. The ID will be set to match the given ID.
      * @return The updated {@link PlantPlan} saved in the database.
      */
-    public PlantPlan updatePlantPlan(String id, PlantPlan update){
+    public PlantPlan updatePlantPlan(String id, PlantPlan update) {
         update.setId(id);
         return plantPlanRepository.save(update);
     }
@@ -91,14 +93,16 @@ public class PlantPlanService {
      * @param id The unique identifier of the PlantPlan to delete.
      *           If the ID does not exist, no action is taken.
      */
-    public void deletePlantPlan(String id){
+    public void deletePlantPlan(String id) {
         plantPlanRepository.deleteById(id);
     }
 
     /**
      * ---------------------------------------------------------------------------
+     * --------------------------------------------------------------
      * Business methods:
      * - Custom queries
+     * --------------------------------------------------------------
      * ---------------------------------------------------------------------------
      */
 
@@ -111,8 +115,59 @@ public class PlantPlanService {
      * @param season the {@link Season} to filter plant plans by (e.g., SPRING, SUMMER)
      * @return a list of {@link PlantPlan} objects that match the given planting season
      */
-    public  List<PlantPlan> findByPlantingSeason(Season season){
-        return  plantPlanRepository.findByPlantingSeason(season);
+    public List<PlantPlan> findByPlantingSeason(Season season) {
+        return plantPlanRepository.findByPlantingSeason(season);
     }
 
+    /**
+     * Retrieves all {@link PlantPlan} entries that match the specified sunlight needs exactly.
+     *
+     * @param sunlight the sunlight requirement (e.g., "Full Sun", "Partial Shade")
+     * @return a list of {@link PlantPlan} objects with the specified sunlight needs
+     */
+    public List<PlantPlan> findBySunlightNeeds(String sunlight) {
+        return plantPlanRepository.findBySunlightNeeds(sunlight);
+    }
+
+    /**
+     * Searches for {@link PlantPlan} entries where the watering frequency contains the given keyword (case-insensitive).
+     *
+     * @param keyword a partial or full string to match against the watering frequency field
+     * @return a list of matching {@link PlantPlan} objects
+     */
+    public List<PlantPlan> searchByWateringFreq(String keyword){
+        return plantPlanRepository.findByWateringFreqContainingIgnoreCase(keyword);
+    }
+
+    /**
+     * Counts the number of {@link PlantPlan} entries that match the specified planting season.
+     * <p>
+     * The comparison is case-sensitive unless preprocessed to match enum casing.
+     *
+     * @param season the planting season to count (e.g., "SPRING")
+     * @return the number of matching plant plans
+     */
+    public long countByPlantingSeason(String season){
+        return plantPlanRepository.countByPlantingSeason(season);
+    }
+
+    /**
+     * Searches for {@link PlantPlan} entries where the name contains the given keyword (case-insensitive).
+     *
+     * @param keyword a partial or full string to match against the plant name
+     * @return a list of matching {@link PlantPlan} objects
+     */
+    public List<PlantPlan> searchByName(String keyword){
+        return plantPlanRepository.findByNameContainingIgnoreCase(keyword);
+    }
+
+    /**
+     * Retrieves the total number of {@link PlantPlan} entries in the database.
+     *
+     * @return the total count of plant plans
+     */
+    public long getTotalPlansCount(){
+        return  plantPlanRepository.count();
+    }
 }
+
